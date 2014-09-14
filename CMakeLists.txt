@@ -13,8 +13,18 @@ else ()
 endif ()
 
 
-set(SOURCE_FILES src/main.cpp src/SurfaceTexture.cpp src/SurfaceTexture.h src/SmartPointer.h)
+set(SOURCE_FILES
+    src/main.cpp
+    src/SurfaceTexture.cpp
+    src/SurfaceTexture.h
+    src/SmartPointer.h
+    src/SmartPointer.cpp
+    )
+
+find_package(Boost COMPONENTS filesystem REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 
 add_executable(ImageViewer ${SOURCE_FILES})
-target_link_libraries ( ImageViewer ${SDLIMAGE_LIBRARY} ${SDL_LIBRARY} )
+target_link_libraries(ImageViewer ${SDLIMAGE_LIBRARY} ${SDL_LIBRARY}  ${Boost_FILESYSTEM_LIBRARY})
 

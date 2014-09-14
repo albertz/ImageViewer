@@ -1,37 +1,25 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-#include <boost/noncopyable.hpp>
+#include <boost/filesystem.hpp>
+#include <list>
+#include <string>
 #include "SmartPointer.h"
+
+auto& errors = std::cerr;
+using std::endl;
 
 
 static SDL_Window *window;
 
 
-template <> void SmartPointer_ObjectDeinit<SDL_Surface> ( SDL_Surface * obj ) {
-	SDL_FreeSurface(obj);
-}
-template <> void SmartPointer_ObjectDeinit<SDL_Texture> ( SDL_Texture * obj ) {
-	SDL_DestroyTexture(obj);
-}
-template <> void SmartPointer_ObjectDeinit<SDL_Renderer> ( SDL_Renderer * obj ) {
-	SDL_DestroyRenderer(obj);
-}
-template <> void SmartPointer_ObjectDeinit<SDL_Window> ( SDL_Window * obj ) {
-	SDL_DestroyWindow(obj);
-}
 
 
-struct Surface : boost::noncopyable {
-	SDL_Surface* m_surf;
-	Surface() : m_surf(0) {}
-	~Surface() {
-		if(m_surf)
-			SDL_FreeSurface(m_surf);
-		m_surf = 0;
-	}
-};
+static std::list<std::string> pictureList;
 
+static void buildPictureList() {
+	namespace fs = boost::filesystem;
+}
 
 static void eventLoop() {
 	SDL_Event ev;
@@ -47,7 +35,7 @@ static void eventLoop() {
 
 int main() {
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		std::cerr << "error on SDL_Init: " << SDL_GetError() << std::endl;
+		errors << "error on SDL_Init: " << SDL_GetError() << endl;
 		return 1;
 	}
 
@@ -57,7 +45,7 @@ int main() {
 			640, 480,
 			0);
 	if(!window) {
-		std::cerr << "error on creating window: " << SDL_GetError() << std::endl;
+		errors << "error on creating window: " << SDL_GetError() << endl;
 		return 1;
 	}
 

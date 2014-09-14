@@ -13,7 +13,7 @@ else ()
 endif ()
 
 
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES src/main.cpp src/SurfaceTexture.cpp src/SurfaceTexture.h src/SmartPointer.h)
 
 add_executable(ImageViewer ${SOURCE_FILES})
 target_link_libraries ( ImageViewer ${SDLIMAGE_LIBRARY} ${SDL_LIBRARY} )

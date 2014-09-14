@@ -21,23 +21,19 @@ Makefile
 cmake_install.cmake
 *.cmake.user
 CMakeLists.txt.user*
-/openlierox.cbp
 
 # CLion JetBrains IDE
 # It just uses CMake - don't add the temporary stuff.
 /.idea
 
+/build
 bin
 *~
 .*.swp
 *.build
 *.o
-libopenlierox_pch_dephelp.a
 *-build
 build-*
-
-# this one is automatically created by CMake
-gamedecompiler.xcodeproj
 
 *.idb
 *.pdb
@@ -48,6 +44,5 @@ gamedecompiler.xcodeproj
 configure-stamp
 build-stamp
 PrecompiledHeader.*
-*openlierox_pch_dephelp.*
 
 distrib

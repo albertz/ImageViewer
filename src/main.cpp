@@ -6,7 +6,7 @@
 #include <string>
 #include "SmartPointer.h"
 
-auto& errors = std::cerr;
+static auto& errors = std::cerr;
 using std::endl;
 
 

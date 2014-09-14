@@ -12,7 +12,7 @@
 #include "SurfaceTexture.h"
 
 using std::endl;
-auto& errors = std::cerr;
+static auto& errors = std::cerr;
 
 SurfaceTexture::SurfaceTexture(const SmartPointer<SDL_Renderer>& renderer, const SmartPointer<SDL_Surface>& surf)
 : w(0), h(0), maxTextureWidth(0), maxTextureHeight(0), numTexturesHoriz(0), numTexturesVert(0)

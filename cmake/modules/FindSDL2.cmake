@@ -75,7 +75,8 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-FIND_PATH(SDL_INCLUDE_DIR SDL.h
+# Search for SDL_render.h to ensure that we get SDL2 and not SDL1.
+FIND_PATH(SDL_INCLUDE_DIR SDL_render.h
   HINTS
   $ENV{SDLDIR}
   PATH_SUFFIXES include/SDL include
@@ -91,7 +92,7 @@ FIND_PATH(SDL_INCLUDE_DIR SDL.h
   /opt/csw # Blastwave
   /opt
 )
-#MESSAGE("SDL_INCLUDE_DIR is ${SDL_INCLUDE_DIR}")
+MESSAGE("SDL_INCLUDE_DIR is ${SDL_INCLUDE_DIR}")
 
 # SDL-1.1 is the name used by FreeBSD ports...
 # don't confuse it for the version number.
@@ -191,9 +192,9 @@ macro ( find_sdl_version _header_file _COMPONENT_NAME _major _minor _micro )
     set ( define_base "SDL" )
   endif ()
 
-  string ( REGEX MATCH "#define ${define_base}_MAJOR[A-Z|_]*[ |	]([0-9])" sdl_comp_version "${lines}" )
+  string ( REGEX MATCH "#define ${define_base}_MAJOR[A-Z|_]*[ |	]*([0-9])" sdl_comp_version "${lines}" )
   set ( ${_major} ${CMAKE_MATCH_1} )
-  string ( REGEX MATCH "#define ${define_base}_MINOR[A-Z|_]*[ |	]([0-9])" sdl_comp_version1 "${lines}" )
+  string ( REGEX MATCH "#define ${define_base}_MINOR[A-Z|_]*[ |	]*([0-9])" sdl_comp_version1 "${lines}" )
   set ( ${_minor} ${CMAKE_MATCH_1} )
   string ( REGEX MATCH "#define ${define_base}_PATCHLEVEL[ |	]*([0-9]*)" sdl_comp_version2 "${lines}" )
   set ( ${_micro} ${CMAKE_MATCH_1} )
@@ -215,35 +216,54 @@ macro ( FindSDL_component _component )
     set ( SDL_COMPONENT_NAME GFXPRIMITIVES )
   endif ()
 
-  find_path ( SDL${UPPERCOMPONENT}_INCLUDE_DIR ${SDL_header_name}
-    HINTS
-    $ENV{SDL${UPPERCOMPONENT}DIR}
-    $ENV{SDLDIR}
-    PATH_SUFFIXES include/SDL include
-    PATHS
-    ~/Library/Frameworks
-    /Library/Frameworks
-    /usr/local/include/SDL12
-    /usr/local/include/SDL11 # FreeBSD ports
-    /usr/include/SDL12
-    /usr/include/SDL11
-    /sw # Fink
-    /opt/local # DarwinPorts
-    /opt/csw # Blastwave
-    /opt
-    )
-  find_library ( SDL${UPPERCOMPONENT}_LIBRARY
-    NAMES SDL_${_component}
-    HINTS
-    $ENV{SDL${UPPERCOMPONENT}DIR}
-    $ENV{SDLDIR}
-    PATH_SUFFIXES lib64 lib
-    PATHS
-    /sw
-    /opt/local
-    /opt/csw
-    /opt
-    )
+  # Extra check for MacOSX frameworks.
+  # This is mandatory as we would confuse SDL1/SDL2 headers otherwise.
+  if(APPLE)
+    find_path ( SDL${UPPERCOMPONENT}_FRAMEWORK_DIR SDL2_${_component}
+        HINTS
+        $ENV{SDL${UPPERCOMPONENT}DIR}
+        $ENV{SDLDIR}
+        PATHS
+        ~/Library/Frameworks
+        /Library/Frameworks
+        )
+    if(SDL${UPPERCOMPONENT}_FRAMEWORK_DIR)
+        set(SDL${UPPERCOMPONENT}_INCLUDE_DIR "${SDL${UPPERCOMPONENT}_FRAMEWORK_DIR}/Headers")
+        set(SDL${UPPERCOMPONENT}_LIBRARY "${SDL${UPPERCOMPONENT}_FRAMEWORK_DIR}/SDL2_${_component}")
+    endif()
+  endif()
+
+  if((NOT SDL${UPPERCOMPONENT}_INCLUDE_DIR) OR (NOT SDL${UPPERCOMPONENT}_LIBRARY))
+      find_path ( SDL${UPPERCOMPONENT}_INCLUDE_DIR ${SDL_header_name}
+        HINTS
+        $ENV{SDL${UPPERCOMPONENT}DIR}
+        $ENV{SDLDIR}
+        PATH_SUFFIXES include/SDL include
+        PATHS
+        ~/Library/Frameworks
+        /Library/Frameworks
+        /usr/local/include/SDL12
+        /usr/local/include/SDL11 # FreeBSD ports
+        /usr/include/SDL12
+        /usr/include/SDL11
+        /sw # Fink
+        /opt/local # DarwinPorts
+        /opt/csw # Blastwave
+        /opt
+        )
+      find_library ( SDL${UPPERCOMPONENT}_LIBRARY
+        NAMES SDL_${_component}
+        HINTS
+        $ENV{SDL${UPPERCOMPONENT}DIR}
+        $ENV{SDLDIR}
+        PATH_SUFFIXES lib64 lib
+        PATHS
+        /sw
+        /opt/local
+        /opt/csw
+        /opt
+        )
+  endif()
 
   if ( SDL${UPPERCOMPONENT}_LIBRARY AND SDL${UPPERCOMPONENT}_INCLUDE_DIR )
     set ( SDL${UPPERCOMPONENT}_FOUND "YES" )
@@ -262,6 +282,8 @@ macro ( FindSDL_component _component )
     endforeach()
     list(REMOVE_DUPLICATES SDL_${UPPERCOMPONENT}_LIBRARY_DIRS)
   endif ()
+
+  MESSAGE("SDL${UPPERCOMPONENT}_INCLUDE_DIR is ${SDL${UPPERCOMPONENT}_INCLUDE_DIR}")
 endmacro ()
 
 set ( SDL_LIBRARY_DIRS "" )

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.4)
 project(ImageViewer)
 
 set ( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" )
+list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS}" )
 
 find_package(SDL2 COMPONENTS image)
 
@@ -21,10 +22,10 @@ set(SOURCE_FILES
     src/SmartPointer.cpp
     )
 
-find_package(Boost COMPONENTS filesystem REQUIRED)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 
 add_executable(ImageViewer ${SOURCE_FILES})
-target_link_libraries(ImageViewer ${SDLIMAGE_LIBRARY} ${SDL_LIBRARY}  ${Boost_FILESYSTEM_LIBRARY})
+target_link_libraries(ImageViewer ${SDLIMAGE_LIBRARY} ${SDL_LIBRARY}  ${Boost_LIBRARIES})
 

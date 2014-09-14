@@ -2,24 +2,58 @@
 #include <SDL_image.h>
 #include <iostream>
 #include <boost/filesystem.hpp>
+#include <memory>
 #include <list>
 #include <string>
+#include <boost/algorithm/string.hpp>
 #include "SmartPointer.h"
+#include "Gfx.h"
 
-static auto& errors = std::cerr;
+static auto &errors = std::cerr;
+static auto &notes = std::cout;
 using std::endl;
+
+namespace fs = boost::filesystem;
 
 
 static SDL_Window *window;
 
 
+struct Picture {
+	std::shared_ptr<Texture> m_texture;
+	fs::path m_path;
 
+	Picture(const fs::path& path) : m_path(path) {}
+};
 
-static std::list<std::string> pictureList;
+struct Pictures {
+	std::list<Picture> m_pictures;
 
-static void buildPictureList() {
-	namespace fs = boost::filesystem;
-}
+	void addPicture(const Picture& pic) {
+		notes << "Add picture: " << pic.m_path << endl;
+		m_pictures.push_back(pic);
+	}
+
+	void loadFromList(const std::string& f) {
+		//...
+	}
+
+	void load(const std::string& dir) {
+		fs::path someDir(dir);
+		for(fs::directory_iterator dir_iter(someDir); dir_iter != fs::directory_iterator(); ++dir_iter) {
+			if(fs::is_regular_file(dir_iter->status())) {
+				fs::path path = dir_iter->path();
+				std::string ext = path.extension().string();
+				boost::to_lower(ext);
+				if(ext == ".jpg" || ext == ".jpeg")
+					addPicture(Picture(path));
+			}
+		}
+	}
+};
+
+static Pictures pictures;
+
 
 static void eventLoop() {
 	SDL_Event ev;
@@ -48,6 +82,8 @@ int main() {
 		errors << "error on creating window: " << SDL_GetError() << endl;
 		return 1;
 	}
+
+	pictures.load(".");
 
 	eventLoop();
 

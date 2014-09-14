@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		230143FA19C5AEDA00E70178 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230143F919C5AEDA00E70178 /* Cocoa.framework */; };
+		2301440419C5AEDB00E70178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2301440219C5AEDB00E70178 /* InfoPlist.strings */; };
+		2301440619C5AEDB00E70178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301440519C5AEDB00E70178 /* main.m */; };
+		2301440A19C5AEDB00E70178 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2301440819C5AEDB00E70178 /* Credits.rtf */; };
+		2301440D19C5AEDB00E70178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2301440C19C5AEDB00E70178 /* AppDelegate.m */; };
+		2301441019C5AEDB00E70178 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2301440E19C5AEDB00E70178 /* MainMenu.xib */; };
+		2301441219C5AEDB00E70178 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2301441119C5AEDB00E70178 /* Images.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		230143F619C5AEDA00E70178 /* ImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		230143F919C5AEDA00E70178 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		230143FC19C5AEDA00E70178 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		230143FD19C5AEDA00E70178 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		230143FE19C5AEDA00E70178 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2301440119C5AEDB00E70178 /* ImageViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ImageViewer-Info.plist"; sourceTree = "<group>"; };
+		2301440319C5AEDB00E70178 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2301440519C5AEDB00E70178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2301440919C5AEDB00E70178 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		2301440B19C5AEDB00E70178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2301440C19C5AEDB00E70178 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2301440F19C5AEDB00E70178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		2301441119C5AEDB00E70178 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		230143F319C5AEDA00E70178 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				230143FA19C5AEDA00E70178 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		230143EB19C5AE7800E70178 = {
+			isa = PBXGroup;
+			children = (
+				230143FF19C5AEDB00E70178 /* mac */,
+				230143F819C5AEDA00E70178 /* Frameworks */,
+				230143F719C5AEDA00E70178 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		230143F719C5AEDA00E70178 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				230143F619C5AEDA00E70178 /* ImageViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		230143F819C5AEDA00E70178 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				230143F919C5AEDA00E70178 /* Cocoa.framework */,
+				230143FB19C5AEDA00E70178 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		230143FB19C5AEDA00E70178 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				230143FC19C5AEDA00E70178 /* AppKit.framework */,
+				230143FD19C5AEDA00E70178 /* CoreData.framework */,
+				230143FE19C5AEDA00E70178 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		230143FF19C5AEDB00E70178 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				2301440B19C5AEDB00E70178 /* AppDelegate.h */,
+				2301440C19C5AEDB00E70178 /* AppDelegate.m */,
+				2301440E19C5AEDB00E70178 /* MainMenu.xib */,
+				2301441119C5AEDB00E70178 /* Images.xcassets */,
+				2301440019C5AEDB00E70178 /* Supporting Files */,
+			);
+			path = mac;
+			sourceTree = "<group>";
+		};
+		2301440019C5AEDB00E70178 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2301440119C5AEDB00E70178 /* ImageViewer-Info.plist */,
+				2301440219C5AEDB00E70178 /* InfoPlist.strings */,
+				2301440519C5AEDB00E70178 /* main.m */,
+				2301440819C5AEDB00E70178 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		230143F519C5AEDA00E70178 /* ImageViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2301442919C5AEDB00E70178 /* Build configuration list for PBXNativeTarget "ImageViewer" */;
+			buildPhases = (
+				230143F219C5AEDA00E70178 /* Sources */,
+				230143F319C5AEDA00E70178 /* Frameworks */,
+				230143F419C5AEDA00E70178 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageViewer;
+			productName = ImageViewer;
+			productReference = 230143F619C5AEDA00E70178 /* ImageViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		230143EC19C5AE7800E70178 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 230143EF19C5AE7800E70178 /* Build configuration list for PBXProject "ImageViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 230143EB19C5AE7800E70178;
+			productRefGroup = 230143F719C5AEDA00E70178 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				230143F519C5AEDA00E70178 /* ImageViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		230143F419C5AEDA00E70178 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2301440419C5AEDB00E70178 /* InfoPlist.strings in Resources */,
+				2301441219C5AEDB00E70178 /* Images.xcassets in Resources */,
+				2301440A19C5AEDB00E70178 /* Credits.rtf in Resources */,
+				2301441019C5AEDB00E70178 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		230143F219C5AEDA00E70178 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2301440D19C5AEDB00E70178 /* AppDelegate.m in Sources */,
+				2301440619C5AEDB00E70178 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2301440219C5AEDB00E70178 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2301440319C5AEDB00E70178 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2301440819C5AEDB00E70178 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2301440919C5AEDB00E70178 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		2301440E19C5AEDB00E70178 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2301440F19C5AEDB00E70178 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		230143F019C5AE7800E70178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		230143F119C5AE7800E70178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		2301442519C5AEDB00E70178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "mac/ImageViewer-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2301442619C5AEDB00E70178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "mac/ImageViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		230143EF19C5AE7800E70178 /* Build configuration list for PBXProject "ImageViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				230143F019C5AE7800E70178 /* Debug */,
+				230143F119C5AE7800E70178 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2301442919C5AEDB00E70178 /* Build configuration list for PBXNativeTarget "ImageViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2301442519C5AEDB00E70178 /* Debug */,
+				2301442619C5AEDB00E70178 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 230143EC19C5AE7800E70178 /* Project object */;
+}

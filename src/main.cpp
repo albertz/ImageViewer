@@ -1,9 +1,37 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
-#include <SDL/SDL.h>
+#include <boost/noncopyable.hpp>
+#include "SmartPointer.h"
+
 
 static SDL_Window *window;
+
+
+template <> void SmartPointer_ObjectDeinit<SDL_Surface> ( SDL_Surface * obj ) {
+	SDL_FreeSurface(obj);
+}
+template <> void SmartPointer_ObjectDeinit<SDL_Texture> ( SDL_Texture * obj ) {
+	SDL_DestroyTexture(obj);
+}
+template <> void SmartPointer_ObjectDeinit<SDL_Renderer> ( SDL_Renderer * obj ) {
+	SDL_DestroyRenderer(obj);
+}
+template <> void SmartPointer_ObjectDeinit<SDL_Window> ( SDL_Window * obj ) {
+	SDL_DestroyWindow(obj);
+}
+
+
+struct Surface : boost::noncopyable {
+	SDL_Surface* m_surf;
+	Surface() : m_surf(0) {}
+	~Surface() {
+		if(m_surf)
+			SDL_FreeSurface(m_surf);
+		m_surf = 0;
+	}
+};
+
 
 static void eventLoop() {
 	SDL_Event ev;

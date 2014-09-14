@@ -97,7 +97,7 @@ MESSAGE("SDL_INCLUDE_DIR is ${SDL_INCLUDE_DIR}")
 # SDL-1.1 is the name used by FreeBSD ports...
 # don't confuse it for the version number.
 FIND_LIBRARY(SDL_LIBRARY_TEMP 
-  NAMES SDL SDL-1.1
+  NAMES SDL2 SDL SDL-1.1
   HINTS
   $ENV{SDLDIR}
   PATH_SUFFIXES lib64 lib
@@ -108,7 +108,7 @@ FIND_LIBRARY(SDL_LIBRARY_TEMP
   /opt
 )
 
-#MESSAGE("SDL_LIBRARY_TEMP is ${SDL_LIBRARY_TEMP}")
+MESSAGE("SDL_LIBRARY_TEMP is ${SDL_LIBRARY_TEMP}")
 
 IF(NOT SDL_BUILDING_LIBRARY)
   IF(NOT ${SDL_INCLUDE_DIR} MATCHES ".framework")
@@ -147,13 +147,6 @@ ENDIF(MINGW)
 
 SET(SDL_FOUND "NO")
 IF(SDL_LIBRARY_TEMP)
-  # For SDLmain
-  IF(NOT SDL_BUILDING_LIBRARY)
-    IF(SDLMAIN_LIBRARY)
-      SET(SDL_LIBRARY_TEMP ${SDLMAIN_LIBRARY} ${SDL_LIBRARY_TEMP})
-    ENDIF(SDLMAIN_LIBRARY)
-  ENDIF(NOT SDL_BUILDING_LIBRARY)
-
   # For OS X, SDL uses Cocoa as a backend so it must link to Cocoa.
   # CMake doesn't display the -framework Cocoa string in the UI even 
   # though it actually is there if I modify a pre-used variable.
@@ -219,17 +212,19 @@ macro ( FindSDL_component _component )
   # Extra check for MacOSX frameworks.
   # This is mandatory as we would confuse SDL1/SDL2 headers otherwise.
   if(APPLE)
-    find_path ( SDL${UPPERCOMPONENT}_FRAMEWORK_DIR SDL2_${_component}
+    find_library ( SDL${UPPERCOMPONENT}_FRAMEWORK_DIR
+    NAMES SDL2_${_component}
         HINTS
         $ENV{SDL${UPPERCOMPONENT}DIR}
         $ENV{SDLDIR}
+        PATH_SUFFIXES ""
         PATHS
         ~/Library/Frameworks
         /Library/Frameworks
         )
     if(SDL${UPPERCOMPONENT}_FRAMEWORK_DIR)
         set(SDL${UPPERCOMPONENT}_INCLUDE_DIR "${SDL${UPPERCOMPONENT}_FRAMEWORK_DIR}/Headers")
-        set(SDL${UPPERCOMPONENT}_LIBRARY "${SDL${UPPERCOMPONENT}_FRAMEWORK_DIR}/SDL2_${_component}")
+        set(SDL${UPPERCOMPONENT}_LIBRARY "${SDL${UPPERCOMPONENT}_FRAMEWORK_DIR}")
     endif()
   endif()
 

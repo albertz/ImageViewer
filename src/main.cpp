@@ -51,11 +51,18 @@ struct Picture {
 		if(!m_texture.get()) return;
 		if(!*m_texture) return;
 
-		SDL_RenderCopy(renderer, m_texture->m_texture, NULL, NULL);
+		// TODO: rotate
+		// TODO: correct ratio scale
+		SDL_RenderCopy(renderer, m_texture->m_texture, 0, 0);
 
-		auto t = getTextureForText(m_path.leaf().string(), ColorBlack());
+		auto t = getTextureForText(m_path.leaf().string(), ColorWhite());
 		if(t.get()) {
-			SDL_RenderCopy(renderer, t->m_texture, 0, 0);
+			SDL_Rect dstrect;
+			dstrect.x = 0;
+			dstrect.y = 0;
+			dstrect.w = 100;
+			dstrect.h = 20;
+			SDL_RenderCopy(renderer, t->m_texture, 0, &dstrect);
 		}
 	}
 };

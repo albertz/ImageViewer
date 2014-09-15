@@ -45,7 +45,8 @@ static inline SDL_Color Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
 	return c;
 }
 
-static inline SDL_Color ColorBlack() { return Color(255,255,255,255); }
+static inline SDL_Color ColorBlack() { return Color(0,0,0,255); }
+static inline SDL_Color ColorWhite() { return Color(255,255,255,255); }
 
 #endif
 

@@ -96,7 +96,7 @@ struct Pictures {
 		m_curPic = m_pictures.begin();
 
 		if(m_curPic != m_pictures.end()) {
-			m_curPic.load();
+			m_curPic->load();
 		}
 	}
 

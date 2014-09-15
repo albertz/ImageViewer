@@ -11,6 +11,7 @@
 #include "SmartPointer.h"
 #include "Gfx.h"
 
+
 static auto &errors = std::cerr;
 static auto &notes = std::cout;
 using std::endl;
@@ -20,7 +21,7 @@ namespace fs = boost::filesystem;
 bool quit = false;
 bool fullscreen = false;
 static SDL_Window *window;
-static SDL_Renderer* renderer;
+SDL_Renderer* renderer;
 
 
 struct Picture {

@@ -33,6 +33,7 @@ struct Texture : boost::noncopyable {
 	}
 };
 
+extern SDL_Renderer* renderer;
 
 #endif
 

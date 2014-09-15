@@ -150,7 +150,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	if(IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF|IMG_INIT_WEBP) != 0) {
+	if(IMG_Init(IMG_INIT_JPG|IMG_INIT_PNG|IMG_INIT_TIF|IMG_INIT_WEBP) == 0) {
 		errors << "IMG_Init failed: " << IMG_GetError() << endl;
 		return 1;
 	}

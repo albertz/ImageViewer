@@ -30,6 +30,7 @@ struct Picture {
 	Picture(const fs::path& path) : m_path(path) {}
 
 	void load() {
+		if(*this) return;
 		Surface surf(IMG_Load(m_path.string().c_str()));
 		if(!surf) {
 			errors << "cannot load " << m_path << ": " << IMG_GetError() << endl;
@@ -94,17 +95,33 @@ struct Pictures {
 
 	void selectPic() {
 		m_curPic = m_pictures.begin();
+		prepareSelectedPic();
+	}
 
-		if(m_curPic != m_pictures.end()) {
-			m_curPic->load();
+	void nextPic() {
+		if(m_curPic == m_pictures.end()) return;
+		++m_curPic;
+		if(m_curPic == m_pictures.end()) m_curPic = m_pictures.begin();
+		prepareSelectedPic();
+	}
+
+	void prevPic() {
+		if(m_curPic == m_pictures.begin()) {
+			if(m_pictures.empty()) return;
+			m_curPic = m_pictures.end();
 		}
+		--m_curPic;
+		prepareSelectedPic();
+	}
+
+	void prepareSelectedPic() {
+		if(m_curPic == m_pictures.end()) return;
+		m_curPic->load();
 	}
 
 	void render() {
-		if(m_curPic != m_pictures.end())
-			selectPic();
-		if(m_curPic != m_pictures.end())
-			return;
+		if(m_curPic == m_pictures.end()) selectPic();
+		if(m_curPic == m_pictures.end()) return;
 		m_curPic->render();
 	}
 };
@@ -123,6 +140,14 @@ static void onKeyDown(SDL_KeyboardEvent& ev) {
 			SDL_SetWindowFullscreen(
 					window,
 					fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+			break;
+		case SDLK_LEFT:
+			pictures.prevPic();
+			break;
+		case SDLK_RIGHT:
+			pictures.nextPic();
+			break;
+		default:
 			break;
 	}
 }

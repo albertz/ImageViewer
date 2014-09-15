@@ -10,6 +10,7 @@
 #include <fstream>
 #include "SmartPointer.h"
 #include "Gfx.h"
+#include "Font.h"
 
 
 static auto &errors = std::cerr;
@@ -49,7 +50,13 @@ struct Picture {
 	void render() {
 		if(!m_texture.get()) return;
 		if(!*m_texture) return;
+
 		SDL_RenderCopy(renderer, m_texture->m_texture, NULL, NULL);
+
+		auto t = getTextureForText(m_path.leaf().string(), ColorBlack());
+		if(t.get()) {
+			SDL_RenderCopy(renderer, t->m_texture, 0, 0);
+		}
 	}
 };
 

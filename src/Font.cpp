@@ -142,6 +142,7 @@ std::shared_ptr<Texture> getTextureForText(const std::string& t, SDL_Color fg) {
 
 	std::shared_ptr<Texture> texture(new Texture(renderer, surface.m_surf));
 	if(!*texture) return NULL;
+	SDL_SetTextureBlendMode(texture->m_texture, SDL_BLENDMODE_BLEND);
 
 	// put into cache
 	RenderedText* r = new RenderedText();

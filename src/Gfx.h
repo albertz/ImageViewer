@@ -5,6 +5,7 @@
 #include <boost/noncopyable.hpp>
 #include <iostream>
 #include <assert.h>
+#include <stdint.h>
 
 struct Surface : boost::noncopyable {
 	SDL_Surface* m_surf;
@@ -34,6 +35,17 @@ struct Texture : boost::noncopyable {
 };
 
 extern SDL_Renderer* renderer;
+
+static inline SDL_Color Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
+	SDL_Color c;
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	c.a = a;
+	return c;
+}
+
+static inline SDL_Color ColorBlack() { return Color(255,255,255,255); }
 
 #endif
 

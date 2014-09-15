@@ -6,6 +6,8 @@
 #include <list>
 #include <string>
 #include <boost/algorithm/string.hpp>
+#include <algorithm>
+#include <fstream>
 #include "SmartPointer.h"
 #include "Gfx.h"
 
@@ -34,13 +36,28 @@ struct Pictures {
 		m_pictures.push_back(pic);
 	}
 
-	void loadFromList(const std::string& f) {
-		//...
+	void loadFromList(const fs::path& f) {
+		std::ifstream ifs;
+		ifs.open(f.string(), std::ios::in);
+		if(!ifs) {
+			errors << "cannot open " << f << endl;
+			return;
+		}
+		while(!ifs.eof() && !ifs.fail()) {
+			std::string s;
+			std::getline(ifs, s);
+			boost::trim(s);
+			if(s.empty()) continue;
+			fs::path path = f.parent_path() / fs::path(s);
+			if(fs::is_regular_file(path))
+				addPicture(Picture(path));
+			else
+				errors << "file does not exist: " << path.string() << endl;
+		}
 	}
 
-	void load(const std::string& dir) {
-		fs::path someDir(dir);
-		for(fs::directory_iterator dir_iter(someDir); dir_iter != fs::directory_iterator(); ++dir_iter) {
+	void loadDir(const fs::path& dir) {
+		for(fs::directory_iterator dir_iter(dir); dir_iter != fs::directory_iterator(); ++dir_iter) {
 			if(fs::is_regular_file(dir_iter->status())) {
 				fs::path path = dir_iter->path();
 				std::string ext = path.extension().string();
@@ -67,7 +84,7 @@ static void eventLoop() {
 	}
 }
 
-int main() {
+int main(int argc, char** argv) {
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		errors << "error on SDL_Init: " << SDL_GetError() << endl;
 		return 1;
@@ -83,7 +100,19 @@ int main() {
 		return 1;
 	}
 
-	pictures.load(".");
+	if(argc > 1) {
+		fs::path path = argv[1];
+		if(fs::is_regular_file(path))
+			pictures.loadFromList(path);
+		else if(fs::is_directory(path))
+			pictures.loadDir(path);
+		else {
+			errors << "not found: " << path.string() << endl;
+			return 1;
+		}
+	}
+	else
+		pictures.loadDir(".");
 
 	eventLoop();
 

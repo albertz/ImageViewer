@@ -42,6 +42,8 @@ struct Picture {
 		}
 	}
 
+	operator bool() const { return m_texture.get() && *m_texture; }
+
 	void render() {
 		if(!m_texture.get()) return;
 		if(!*m_texture) return;
@@ -92,6 +94,10 @@ struct Pictures {
 
 	void selectPic() {
 		m_curPic = m_pictures.begin();
+
+		if(m_curPic != m_pictures.end()) {
+			m_curPic.load();
+		}
 	}
 
 	void render() {
@@ -124,7 +130,7 @@ static void onKeyDown(SDL_KeyboardEvent& ev) {
 static void mainLoop() {
 	while(true) {
 		SDL_RenderClear(renderer);
-
+		pictures.render();
 		SDL_RenderPresent(renderer);
 
 		SDL_Event ev;
